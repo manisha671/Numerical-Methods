@@ -1,0 +1,27 @@
+function [x, e]= mybisect (f,a,b,n)
+%does n iterations
+%input: f -inline function
+%       a,b left and right edges of interval
+
+format long
+c=f(a); d=f(b);
+if c*d >0.0
+    error('FUNCTION HAS SAME SIGN AT BOTH ENDS')
+end
+disp ('            x             y          ' )
+for i =1:n
+    x =(a+b)/2;
+    y=f(x);
+    disp ([x  y])
+    if y==0.0
+        e=0;
+        break
+    end
+    if c*y <0
+        b=x;
+    else
+        a=x;
+    end
+end
+x =(a+b)/2;
+e = (b-a)/2;
